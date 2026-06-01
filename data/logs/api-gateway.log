@@ -1,0 +1,40 @@
+[2025-06-01T01:50:00.000Z] INFO  api-gateway     Routed POST /checkout → payment-service 200 OK latency=42ms
+[2025-06-01T01:50:05.000Z] INFO  api-gateway     Routed GET  /orders   → order-service   200 OK latency=18ms
+[2025-06-01T01:50:40.000Z] INFO  api-gateway     Routed POST /checkout → payment-service 200 OK latency=42ms
+[2025-06-01T01:50:45.000Z] INFO  api-gateway     Routed GET  /orders   → order-service   200 OK latency=18ms
+[2025-06-01T01:51:20.000Z] INFO  api-gateway     Routed POST /checkout → payment-service 200 OK latency=42ms
+[2025-06-01T01:51:25.000Z] INFO  api-gateway     Routed GET  /orders   → order-service   200 OK latency=18ms
+[2025-06-01T01:52:00.000Z] INFO  api-gateway     Routed POST /checkout → payment-service 200 OK latency=42ms
+[2025-06-01T01:52:05.000Z] INFO  api-gateway     Routed GET  /orders   → order-service   200 OK latency=18ms
+[2025-06-01T01:52:40.000Z] INFO  api-gateway     Routed POST /checkout → payment-service 200 OK latency=42ms
+[2025-06-01T01:52:45.000Z] INFO  api-gateway     Routed GET  /orders   → order-service   200 OK latency=18ms
+[2025-06-01T01:53:20.000Z] INFO  api-gateway     Routed POST /checkout → payment-service 200 OK latency=42ms
+[2025-06-01T01:53:25.000Z] INFO  api-gateway     Routed GET  /orders   → order-service   200 OK latency=18ms
+[2025-06-01T01:54:00.000Z] INFO  api-gateway     Routed POST /checkout → payment-service 200 OK latency=42ms
+[2025-06-01T01:54:05.000Z] INFO  api-gateway     Routed GET  /orders   → order-service   200 OK latency=18ms
+[2025-06-01T01:54:40.000Z] INFO  api-gateway     Routed POST /checkout → payment-service 200 OK latency=42ms
+[2025-06-01T01:54:45.000Z] INFO  api-gateway     Routed GET  /orders   → order-service   200 OK latency=18ms
+[2025-06-01T01:55:20.000Z] INFO  api-gateway     Routed POST /checkout → payment-service 200 OK latency=42ms
+[2025-06-01T01:55:25.000Z] INFO  api-gateway     Routed GET  /orders   → order-service   200 OK latency=18ms
+[2025-06-01T01:56:00.000Z] INFO  api-gateway     Routed POST /checkout → payment-service 200 OK latency=42ms
+[2025-06-01T01:56:05.000Z] INFO  api-gateway     Routed GET  /orders   → order-service   200 OK latency=18ms
+[2025-06-01T01:56:40.000Z] INFO  api-gateway     Routed POST /checkout → payment-service 200 OK latency=42ms
+[2025-06-01T01:56:45.000Z] INFO  api-gateway     Routed GET  /orders   → order-service   200 OK latency=18ms
+[2025-06-01T01:57:20.000Z] INFO  api-gateway     Routed POST /checkout → payment-service 200 OK latency=42ms
+[2025-06-01T01:57:25.000Z] INFO  api-gateway     Routed GET  /orders   → order-service   200 OK latency=18ms
+[2025-06-01T01:58:00.000Z] INFO  api-gateway     Routed POST /checkout → payment-service 200 OK latency=42ms
+[2025-06-01T01:58:05.000Z] INFO  api-gateway     Routed GET  /orders   → order-service   200 OK latency=18ms
+[2025-06-01T01:58:40.000Z] INFO  api-gateway     Routed POST /checkout → payment-service 200 OK latency=42ms
+[2025-06-01T01:58:45.000Z] INFO  api-gateway     Routed GET  /orders   → order-service   200 OK latency=18ms
+[2025-06-01T01:59:20.000Z] INFO  api-gateway     Routed POST /checkout → payment-service 200 OK latency=42ms
+[2025-06-01T01:59:25.000Z] INFO  api-gateway     Routed GET  /orders   → order-service   200 OK latency=18ms
+[2025-06-01T01:59:50.000Z]  WARN  api-gateway     payment-service latency elevated: 1800ms (threshold: 500ms)
+[2025-06-01T02:00:00.000Z]  WARN  api-gateway     payment-service latency elevated: 3200ms
+[2025-06-01T02:00:10.000Z] ERROR api-gateway     payment-service health check FAILED — marking unhealthy
+[2025-06-01T02:00:15.000Z] ERROR api-gateway     Routed POST /checkout → payment-service TIMEOUT after 5000ms
+[2025-06-01T02:00:20.000Z] ERROR api-gateway     Routed POST /checkout → payment-service TIMEOUT after 5000ms
+[2025-06-01T02:00:25.000Z]  WARN  api-gateway     Circuit breaker OPEN for payment-service (5 failures in 30s)
+[2025-06-01T02:00:30.000Z] ERROR api-gateway     All requests to payment-service being rejected (circuit OPEN)
+[2025-06-01T02:00:50.000Z]  WARN  api-gateway     Thread pool saturation: 94/100 worker threads busy
+[2025-06-01T02:01:05.000Z] ERROR api-gateway     Thread pool EXHAUSTED — dropping incoming requests
+[2025-06-01T02:01:20.000Z] ERROR api-gateway     503 Service Unavailable returned to 12 clients in last 10s

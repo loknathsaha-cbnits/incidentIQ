@@ -17,3 +17,6 @@ class IncidentState(TypedDict):
     fix_steps: list[str]                   # ordered list of what to do right now
 
     messages: Annotated[list[BaseMessage], add_messages]
+
+    next_action: str          
+    github_issue_url: str

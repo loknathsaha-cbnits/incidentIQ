@@ -20,3 +20,4 @@ class IncidentState(TypedDict):
 
     next_action: str          
     github_issue_url: str
+    email_sent: bool

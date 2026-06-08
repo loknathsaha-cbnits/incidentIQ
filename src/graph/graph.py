@@ -1,5 +1,7 @@
 from langgraph.graph import END, StateGraph
 
+from src.tools.emailer import emailer
+
 from ..tools.display import display
 from ..tools.github_node import github_node
 from .state import IncidentState
@@ -25,6 +27,7 @@ workflow.add_node("agent", agent)
 workflow.add_node("reporter", reporter)
 workflow.add_node("decision", decision)
 workflow.add_node("github_node", github_node)
+workflow.add_node("emailer", emailer) 
 workflow.add_node("display", display)
 
 workflow.set_entry_point("log_reader")
@@ -41,6 +44,7 @@ workflow.add_conditional_edges(
 )
 
 workflow.add_edge("github_node", "display")
-workflow.add_edge("display", END)
+workflow.add_edge("display",     "emailer")
+workflow.add_edge("emailer", END)
 
 graph = workflow.compile()

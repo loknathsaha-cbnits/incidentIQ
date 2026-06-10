@@ -1,13 +1,13 @@
-[2025-06-01T01:50:00.000Z] INFO  notification    Sent email order_id=ord_9330 template=order_confirmation to=user1@example.com status=DELIVERED
-[2025-06-01T01:51:00.000Z] INFO  notification    Sent email order_id=ord_7055 template=order_confirmation to=user36@example.com status=DELIVERED
-[2025-06-01T01:52:00.000Z] INFO  notification    Sent email order_id=ord_6710 template=order_confirmation to=user80@example.com status=DELIVERED
-[2025-06-01T01:53:00.000Z] INFO  notification    Sent email order_id=ord_7775 template=order_confirmation to=user90@example.com status=DELIVERED
-[2025-06-01T01:54:00.000Z] INFO  notification    Sent email order_id=ord_6114 template=order_confirmation to=user99@example.com status=DELIVERED
-[2025-06-01T01:55:00.000Z] INFO  notification    Sent email order_id=ord_9593 template=order_confirmation to=user31@example.com status=DELIVERED
-[2025-06-01T01:56:00.000Z] INFO  notification    Sent email order_id=ord_5595 template=order_confirmation to=user1@example.com status=DELIVERED
-[2025-06-01T01:57:00.000Z] INFO  notification    Sent email order_id=ord_5919 template=order_confirmation to=user12@example.com status=DELIVERED
-[2025-06-01T01:58:00.000Z] INFO  notification    Sent email order_id=ord_7181 template=order_confirmation to=user16@example.com status=DELIVERED
-[2025-06-01T01:59:00.000Z] INFO  notification    Sent email order_id=ord_8522 template=order_confirmation to=user59@example.com status=DELIVERED
+[2025-06-01T01:50:00.000Z] INFO  notification    Sent email order_id=ord_6603 template=order_confirmation to=user12@example.com status=DELIVERED
+[2025-06-01T01:51:00.000Z] INFO  notification    Sent email order_id=ord_5689 template=order_confirmation to=user46@example.com status=DELIVERED
+[2025-06-01T01:52:00.000Z] INFO  notification    Sent email order_id=ord_9193 template=order_confirmation to=user1@example.com status=DELIVERED
+[2025-06-01T01:53:00.000Z] INFO  notification    Sent email order_id=ord_7901 template=order_confirmation to=user90@example.com status=DELIVERED
+[2025-06-01T01:54:00.000Z] INFO  notification    Sent email order_id=ord_8340 template=order_confirmation to=user19@example.com status=DELIVERED
+[2025-06-01T01:55:00.000Z] INFO  notification    Sent email order_id=ord_5768 template=order_confirmation to=user25@example.com status=DELIVERED
+[2025-06-01T01:56:00.000Z] INFO  notification    Sent email order_id=ord_5557 template=order_confirmation to=user2@example.com status=DELIVERED
+[2025-06-01T01:57:00.000Z] INFO  notification    Sent email order_id=ord_6739 template=order_confirmation to=user96@example.com status=DELIVERED
+[2025-06-01T01:58:00.000Z] INFO  notification    Sent email order_id=ord_5444 template=order_confirmation to=user57@example.com status=DELIVERED
+[2025-06-01T01:59:00.000Z] INFO  notification    Sent email order_id=ord_7363 template=order_confirmation to=user38@example.com status=DELIVERED
 [2025-06-01T02:00:50.000Z] INFO  notification    Queue depth: 8 messages (normal)
 [2025-06-01T02:01:20.000Z]  WARN  notification    Queue depth rising: 340 messages — consumers may be slow
 [2025-06-01T02:01:50.000Z]  WARN  notification    Queue depth: 1,820 messages — investigate order-service publish rate

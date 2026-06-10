@@ -1,0 +1,18 @@
+{
+  "runbooks": [
+    {
+      "id": "db_pool_exhaustion",
+      "match_keywords": ["pool", "database", "connection", "postgres", "mongodb"],
+      "description": "Triggered when a microservice exhausts its database connection pool.",
+      "mitigation_command": "python scripts/mitigate_pool.py",
+      "requires_approval": false
+    },
+    {
+      "id": "service_unresponsive",
+      "match_keywords": ["timeout", "502", "504", "down", "unresponsive"],
+      "description": "Triggered when a service health check fails repeatedly.",
+      "mitigation_command": "python scripts/restart_service.py",
+      "requires_approval": true
+    }
+  ]
+}

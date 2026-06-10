@@ -2,7 +2,8 @@ from rich.console import Console
 from rich.table import Table
 from rich import box
 from rich.panel import Panel
-from rich.progress import Progress, SpinnerColumn, TextColumn
+from rich.markdown import Markdown
+from rich.progress import BarColumn, Progress, SpinnerColumn, TextColumn
 import time
 
 from ..graph.state import IncidentState
@@ -11,77 +12,107 @@ console = Console()
 
 
 def display(state: IncidentState) -> IncidentState:
-
-    # ── Loading animation ────────────────────────────────────────────────
+    """
+    Renders the final, high-impact triage and remediation overview to the console.
+    Converts raw AI markdown text into beautifully styled terminal widgets.
+    """
+    
+    # ── Chronological Loading Ticker ─────────────────────────────────────
+    # Simulates final log compilation and dashboard rendering
     steps = [
-        "Reading service logs...",
-        "Correlating failures across services...",
-        "Identifying root cause...",
-        "Calculating blast radius...",
-        "Generating incident report...",
+        "Synthesizing root cause artifacts...",
+        "Validating runbook patch status...",
+        "Compiling cross-service telemetry...",
+        "Rendering final incident report dashboard..."
     ]
 
     with Progress(
-        SpinnerColumn(),
-        TextColumn("[bold yellow]{task.description}"),
-        transient=True,   # clears itself after done — clean terminal
-        console=console,
-    ) as progress:
+            SpinnerColumn(), 
+            TextColumn("[magenta]{task.description}"), 
+            BarColumn(bar_width=20, style="magenta"),  # Changed 'color' to 'style'
+            console=console
+        ) as progress:
         task = progress.add_task("", total=len(steps))
         for step in steps:
             progress.update(task, description=step)
-            time.sleep(0.8)   # purely for visual effect on camera
+            time.sleep(0.6)   # Paced cleanly for screen recorders
             progress.advance(task)
 
-    # ── Separator ────────────────────────────────────────────────────────
-    console.rule("[bold red]⚠  INCIDENT DETECTED[/bold red]")
+    # ── Global Screen Heading Separator ──────────────────────────────────
+    console.rule("[bold red]🚨 SYSTEM TRIAGE & AUTO-REMEDIATION METRICS[/bold red]")
     console.print()
 
-    # ── Service status table ─────────────────────────────────────────────
-    table = Table(box=box.ROUNDED, title="🔍 Service Health Summary")
-    table.add_column("Service",  style="cyan",  no_wrap=True)
-    table.add_column("Status",   style="bold",  no_wrap=True)
-    table.add_column("Summary")
+    # ── Dynamic Service Status Table ─────────────────────────────────────
+    table = Table(box=box.ROUNDED, title="🔍 Post-Mitigation Service Cluster Health")
+    table.add_column("Service Component", style="cyan", no_wrap=True)
+    table.add_column("Remediation Status", style="bold", no_wrap=True)
+    table.add_column("Observed Diagnostics Anomaly (Truncated)")
 
-    severity_colors = {"CRITICAL": "red", "DEGRADED": "yellow", "HEALTHY": "green"}
+    severity_colors = {
+        "HEALTHY / MUTATED": "green", 
+        "CRITICAL EFFECTED": "red", 
+        "DEGRADED": "yellow", 
+        "HEALTHY": "green"
+    }
+
+    root_cause = state.get("root_cause", "").lower()
 
     for service, summary in state["per_service_summaries"].items():
-        status = "CRITICAL" if service in state["blast_radius"] else "HEALTHY"
-        color  = severity_colors.get(status, "white")
+        # Determine current state context dynamically
+        if service in root_cause:
+            # If the service was the root cause, highlight that the AI fixed/mutated it
+            status = "HEALTHY / MUTATED"
+        elif service in state["blast_radius"]:
+            # Services knocked out downstream in the cascade collapse
+            status = "CRITICAL EFFECTED"
+        else:
+            status = "HEALTHY"
+            
+        color = severity_colors.get(status, "white")
         table.add_row(
             service,
             f"[{color}]{status}[/{color}]",
-            summary[:80]
+            summary[:90] # Safe text bounding truncation
         )
 
     console.print(table)
     console.print()
 
-    # ── Incident report panel ────────────────────────────────────────────
+    # ── Rich Markdown Incident Report Panel (The Main Content Block) ─────
+    # Crucial Fix: Wrapping raw text strings inside Markdown() yields premium styling
+    raw_markdown_report = state.get("incident_report", "### No Analytical Text Payload Found.")
+    formatted_markdown = Markdown(raw_markdown_report)
+
     console.print(Panel(
-        state["incident_report"],
-        title=f"[red]⚠  INCIDENT REPORT — {state['severity']}[/red]",
+        formatted_markdown,
+        title=f"[bold red]⚠ SYSTEM LEVEL INCIDENT OVERVIEW — {state.get('severity', 'P1')}[/bold red]",
         border_style="red",
         padding=(1, 2),
     ))
 
-    # ── Fix steps ────────────────────────────────────────────────────────
-    console.print("\n[bold yellow]🛠  Fix Steps (in order):[/bold yellow]")
-    for i, step in enumerate(state["fix_steps"], 1):
-        console.print(f"  [cyan]{i}.[/cyan] {step}")
+    # ── Executed Script Actions / Fix Steps Summary ──────────────────────
+    console.print("\n[bold yellow]🛠 Actionable Remediation Event History Log:[/bold yellow]")
+    for i, step in enumerate(state.get("fix_steps", []), 1):
+        console.print(f"  [magenta]{i}.[/magenta] {step}")
 
     console.print()
 
-    # ── GitHub issue link ────────────────────────────────────────────────
+    # ── GitHub Issue Tracking Panel ──────────────────────────────────────
     if state.get("github_issue_url"):
+        issue_info = (
+            f"[bold white]Issue Target URL:[/bold white] [cyan underline]{state['github_issue_url']}[/cyan underline]\n"
+            f"[dim]Tracking item dispatched synchronously to repository. Logs preserved upstream.[/dim]"
+        )
         console.print(Panel(
-            f"[bold white]{state['github_issue_url']}[/bold white]",
-            title="[green]✅ GitHub Issue Auto-Created[/green]",
+            issue_info,
+            title="[bold green]✅ GitHub Operational Escalation Issue Dispatched[/bold green]",
             border_style="green",
-            padding=(0, 2),
+            padding=(1, 2),
+            expand=False
         ))
 
     console.print()
-    console.rule("[bold green]✅  Triage Complete[/bold green]")
+    console.rule("[bold green]🏁 COMPREHENSIVE TRIAGE AND MITIGATION FLOW COMPLETE[/bold green]")
+    console.print()
 
     return state

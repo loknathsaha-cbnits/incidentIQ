@@ -1,27 +1,27 @@
-[2025-06-01T01:50:00.000Z] INFO  order-service   Created order order_id=ord_6698 items=3 status=PENDING
-[2025-06-01T01:50:10.000Z] INFO  order-service   Sent order confirmation event to notification-service order_id=ord_9375
-[2025-06-01T01:50:50.000Z] INFO  order-service   Created order order_id=ord_8308 items=3 status=PENDING
-[2025-06-01T01:51:00.000Z] INFO  order-service   Sent order confirmation event to notification-service order_id=ord_5543
-[2025-06-01T01:51:40.000Z] INFO  order-service   Created order order_id=ord_8740 items=3 status=PENDING
-[2025-06-01T01:51:50.000Z] INFO  order-service   Sent order confirmation event to notification-service order_id=ord_6011
-[2025-06-01T01:52:30.000Z] INFO  order-service   Created order order_id=ord_5399 items=3 status=PENDING
-[2025-06-01T01:52:40.000Z] INFO  order-service   Sent order confirmation event to notification-service order_id=ord_5110
-[2025-06-01T01:53:20.000Z] INFO  order-service   Created order order_id=ord_8931 items=3 status=PENDING
-[2025-06-01T01:53:30.000Z] INFO  order-service   Sent order confirmation event to notification-service order_id=ord_8947
-[2025-06-01T01:54:10.000Z] INFO  order-service   Created order order_id=ord_6282 items=3 status=PENDING
-[2025-06-01T01:54:20.000Z] INFO  order-service   Sent order confirmation event to notification-service order_id=ord_6271
-[2025-06-01T01:55:00.000Z] INFO  order-service   Created order order_id=ord_5319 items=3 status=PENDING
-[2025-06-01T01:55:10.000Z] INFO  order-service   Sent order confirmation event to notification-service order_id=ord_7216
-[2025-06-01T01:55:50.000Z] INFO  order-service   Created order order_id=ord_6920 items=3 status=PENDING
-[2025-06-01T01:56:00.000Z] INFO  order-service   Sent order confirmation event to notification-service order_id=ord_8750
-[2025-06-01T01:56:40.000Z] INFO  order-service   Created order order_id=ord_8955 items=3 status=PENDING
-[2025-06-01T01:56:50.000Z] INFO  order-service   Sent order confirmation event to notification-service order_id=ord_8417
-[2025-06-01T01:57:30.000Z] INFO  order-service   Created order order_id=ord_7807 items=3 status=PENDING
-[2025-06-01T01:57:40.000Z] INFO  order-service   Sent order confirmation event to notification-service order_id=ord_8969
-[2025-06-01T01:58:20.000Z] INFO  order-service   Created order order_id=ord_8412 items=3 status=PENDING
-[2025-06-01T01:58:30.000Z] INFO  order-service   Sent order confirmation event to notification-service order_id=ord_6152
-[2025-06-01T01:59:10.000Z] INFO  order-service   Created order order_id=ord_8009 items=3 status=PENDING
-[2025-06-01T01:59:20.000Z] INFO  order-service   Sent order confirmation event to notification-service order_id=ord_7006
+[2025-06-01T01:50:00.000Z] INFO  order-service   Created order order_id=ord_9146 items=3 status=PENDING
+[2025-06-01T01:50:10.000Z] INFO  order-service   Sent order confirmation event to notification-service order_id=ord_6734
+[2025-06-01T01:50:50.000Z] INFO  order-service   Created order order_id=ord_6813 items=3 status=PENDING
+[2025-06-01T01:51:00.000Z] INFO  order-service   Sent order confirmation event to notification-service order_id=ord_7000
+[2025-06-01T01:51:40.000Z] INFO  order-service   Created order order_id=ord_7718 items=3 status=PENDING
+[2025-06-01T01:51:50.000Z] INFO  order-service   Sent order confirmation event to notification-service order_id=ord_7388
+[2025-06-01T01:52:30.000Z] INFO  order-service   Created order order_id=ord_8526 items=3 status=PENDING
+[2025-06-01T01:52:40.000Z] INFO  order-service   Sent order confirmation event to notification-service order_id=ord_6747
+[2025-06-01T01:53:20.000Z] INFO  order-service   Created order order_id=ord_9488 items=3 status=PENDING
+[2025-06-01T01:53:30.000Z] INFO  order-service   Sent order confirmation event to notification-service order_id=ord_7539
+[2025-06-01T01:54:10.000Z] INFO  order-service   Created order order_id=ord_6794 items=3 status=PENDING
+[2025-06-01T01:54:20.000Z] INFO  order-service   Sent order confirmation event to notification-service order_id=ord_6979
+[2025-06-01T01:55:00.000Z] INFO  order-service   Created order order_id=ord_9841 items=3 status=PENDING
+[2025-06-01T01:55:10.000Z] INFO  order-service   Sent order confirmation event to notification-service order_id=ord_7672
+[2025-06-01T01:55:50.000Z] INFO  order-service   Created order order_id=ord_6518 items=3 status=PENDING
+[2025-06-01T01:56:00.000Z] INFO  order-service   Sent order confirmation event to notification-service order_id=ord_5921
+[2025-06-01T01:56:40.000Z] INFO  order-service   Created order order_id=ord_6413 items=3 status=PENDING
+[2025-06-01T01:56:50.000Z] INFO  order-service   Sent order confirmation event to notification-service order_id=ord_5526
+[2025-06-01T01:57:30.000Z] INFO  order-service   Created order order_id=ord_9134 items=3 status=PENDING
+[2025-06-01T01:57:40.000Z] INFO  order-service   Sent order confirmation event to notification-service order_id=ord_7344
+[2025-06-01T01:58:20.000Z] INFO  order-service   Created order order_id=ord_5559 items=3 status=PENDING
+[2025-06-01T01:58:30.000Z] INFO  order-service   Sent order confirmation event to notification-service order_id=ord_5979
+[2025-06-01T01:59:10.000Z] INFO  order-service   Created order order_id=ord_5965 items=3 status=PENDING
+[2025-06-01T01:59:20.000Z] INFO  order-service   Sent order confirmation event to notification-service order_id=ord_8396
 [2025-06-01T02:00:20.000Z]  WARN  order-service   POST /orders/confirm waiting on payment-service response... (2100ms)
 [2025-06-01T02:00:35.000Z]  WARN  order-service   POST /orders/confirm waiting on payment-service response... (4300ms)
 [2025-06-01T02:00:50.000Z] ERROR order-service   payment-service call TIMEOUT after 5000ms — order ord_7823 stuck in PENDING

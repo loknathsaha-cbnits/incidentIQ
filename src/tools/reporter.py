@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import time
 from typing import Any
 import os
 from langchain_openai import ChatOpenAI
@@ -61,6 +62,9 @@ def run_reporter_llm(state: IncidentState) -> dict[str, Any]:
     )
     affected_services = ", ".join(blast_radius) if blast_radius else "none"
 
+    max_retries = 5
+    retry_delay = 2
+
     system_message = SystemMessage(
         content=(
             "You are an incident report writer. "
@@ -85,7 +89,19 @@ def run_reporter_llm(state: IncidentState) -> dict[str, Any]:
         )
     )
 
-    response = llm.invoke([system_message, human_message])
+    # response = llm.invoke([system_message, human_message])
+    for attempt in range(max_retries):
+        try:
+            response = llm.invoke([system_message, human_message]) 
+            break
+        except Exception as e:
+            if "503" in str(e) and attempt < max_retries - 1:
+                print(f"⚠️ Groq 503 (High Demand). Retrying in {retry_delay}s... (Attempt {attempt + 1}/{max_retries})")
+                time.sleep(retry_delay)
+                retry_delay *= 2
+            else:
+                # If it's a different error or we ran out of retries, raise it
+                raise e
     text = response.content.strip()
 
     try:

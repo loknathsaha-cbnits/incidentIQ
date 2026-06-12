@@ -1,13 +1,13 @@
-[2025-06-01T01:50:00.000Z] INFO  payment-service Processed payment txn_id=txn_97288 amount=£107.60 status=SUCCESS
-[2025-06-01T01:51:00.000Z] INFO  payment-service Processed payment txn_id=txn_51295 amount=£448.00 status=SUCCESS
-[2025-06-01T01:52:00.000Z] INFO  payment-service Processed payment txn_id=txn_85859 amount=£446.98 status=SUCCESS
-[2025-06-01T01:53:00.000Z] INFO  payment-service Processed payment txn_id=txn_37346 amount=£471.47 status=SUCCESS
-[2025-06-01T01:54:00.000Z] INFO  payment-service Processed payment txn_id=txn_27985 amount=£421.06 status=SUCCESS
-[2025-06-01T01:55:00.000Z] INFO  payment-service Processed payment txn_id=txn_74597 amount=£160.02 status=SUCCESS
-[2025-06-01T01:56:00.000Z] INFO  payment-service Processed payment txn_id=txn_78235 amount=£373.08 status=SUCCESS
-[2025-06-01T01:57:00.000Z] INFO  payment-service Processed payment txn_id=txn_82684 amount=£306.14 status=SUCCESS
-[2025-06-01T01:58:00.000Z] INFO  payment-service Processed payment txn_id=txn_15220 amount=£435.42 status=SUCCESS
-[2025-06-01T01:59:00.000Z] INFO  payment-service Processed payment txn_id=txn_64088 amount=£17.98 status=SUCCESS
+[2025-06-01T01:50:00.000Z] INFO  payment-service Processed payment txn_id=txn_61985 amount=£217.02 status=SUCCESS
+[2025-06-01T01:51:00.000Z] INFO  payment-service Processed payment txn_id=txn_25759 amount=£166.15 status=SUCCESS
+[2025-06-01T01:52:00.000Z] INFO  payment-service Processed payment txn_id=txn_26810 amount=£327.04 status=SUCCESS
+[2025-06-01T01:53:00.000Z] INFO  payment-service Processed payment txn_id=txn_58055 amount=£186.00 status=SUCCESS
+[2025-06-01T01:54:00.000Z] INFO  payment-service Processed payment txn_id=txn_65803 amount=£346.24 status=SUCCESS
+[2025-06-01T01:55:00.000Z] INFO  payment-service Processed payment txn_id=txn_95581 amount=£90.17 status=SUCCESS
+[2025-06-01T01:56:00.000Z] INFO  payment-service Processed payment txn_id=txn_35310 amount=£418.05 status=SUCCESS
+[2025-06-01T01:57:00.000Z] INFO  payment-service Processed payment txn_id=txn_86554 amount=£101.21 status=SUCCESS
+[2025-06-01T01:58:00.000Z] INFO  payment-service Processed payment txn_id=txn_65828 amount=£359.50 status=SUCCESS
+[2025-06-01T01:59:00.000Z] INFO  payment-service Processed payment txn_id=txn_37510 amount=£43.43 status=SUCCESS
 [2025-06-01T01:59:00.000Z]  WARN  payment-service DB connection pool usage high: 18/20 connections in use
 [2025-06-01T01:59:10.000Z]  WARN  payment-service DB connection pool usage critical: 20/20 connections in use
 [2025-06-01T01:59:20.000Z] ERROR payment-service Failed to acquire DB connection — pool exhausted (timeout=3000ms)

@@ -72,6 +72,7 @@ def run_agent_llm(parsed: dict[str, list[dict[str, str]]]) -> dict[str, Any]:
         )
     )
 
+    print("Contacting Groq API for log analysis... Please wait.")
     response = llm.invoke([system_message, human_message])
     content = response.content.strip()
 

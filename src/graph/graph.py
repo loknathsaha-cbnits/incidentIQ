@@ -32,7 +32,7 @@ workflow.add_node("mitigation_node", mitigation_node)
 workflow.add_node("emailer", emailer) 
 workflow.add_node("display", display)
 
-workflow.set_entry_point("log_reader")
+workflow.set_entry_point("mitigation_node")
 workflow.add_edge("log_reader", "agent")
 workflow.add_edge("agent", "reporter")
 workflow.add_edge("reporter", "decision")
@@ -47,7 +47,7 @@ workflow.add_conditional_edges(
 
 workflow.add_edge("github_node", "mitigation_node")  
 workflow.add_edge("mitigation_node", "display") 
-workflow.add_edge("display", "emailer")
-workflow.add_edge("emailer", END)
+workflow.add_edge("display", END)
+# workflow.add_edge("emailer", END)
 
 graph = workflow.compile()

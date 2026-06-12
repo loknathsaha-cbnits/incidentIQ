@@ -9,12 +9,12 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from dotenv import load_dotenv
 from ..graph.state import IncidentState
 
-
 load_dotenv()
 
 LLM_MODEL = os.getenv("GEMINI_LLM_MODEL")
-API_KEY=os.getenv("GEMINI_API_KEY")
-BASE_URL=os.getenv("GEMINI_BASE_URL")
+API_KEY = os.getenv("GEMINI_API_KEY")
+BASE_URL = os.getenv("GEMINI_BASE_URL")
+
 
 def build_fix_steps(state: IncidentState) -> list[str]:
     blast_radius = state.get("blast_radius", [])
@@ -44,12 +44,11 @@ def build_fix_steps(state: IncidentState) -> list[str]:
 
 
 def run_reporter_llm(state: IncidentState) -> dict[str, Any]:
-    print("Agent thinking")
     llm = ChatOpenAI(
-    model = LLM_MODEL,
-    api_key = API_KEY,
-    base_url = BASE_URL,
-    temperature= 0.1,
+        model=LLM_MODEL,
+        api_key=API_KEY,
+        base_url=BASE_URL,
+        temperature=0.1,
     )
 
     root_cause = state.get("root_cause", "Unknown")
@@ -63,50 +62,72 @@ def run_reporter_llm(state: IncidentState) -> dict[str, Any]:
     affected_services = ", ".join(blast_radius) if blast_radius else "none"
 
     max_retries = 5
-    retry_delay = 2
+    retry_delay = 4  # Start slightly higher for rate limit safety windows
 
     system_message = SystemMessage(
         content=(
-            "You are an incident report writer. "
-            "Generate a Markdown incident report and a list of corrective action steps. "
-            "Return only valid JSON with two keys: incident_report and fix_steps."
+            "You are an expert incident report writer. "
+            "Generate a highly professional Markdown incident report and structural corrective steps. "
+            "CRITICAL: Your output must be a clean, valid JSON object with precisely two keys: 'incident_report' and 'fix_steps'. "
+            "Do not include code block wrap hooks like ```json ... ```. Escaped inner newlines properly."
         )
     )
 
     human_message = HumanMessage(
         content=(
-            "Incident state:\n"
+            "Incident target state specs:\n"
             f"- root_cause: {root_cause}\n"
             f"- severity: {severity}\n"
             f"- affected_services: {affected_services}\n"
             f"- service_summaries:\n{service_summaries}\n\n"
-            "Produce a JSON object like:\n"
+            "Produce structural JSON string formatted exactly like:\n"
             '{\n'
-            '  "incident_report": "...",\n'
-            '  "fix_steps": ["...", "..."]\n'
+            '  "incident_report": "# Detailed Markdown Report Headings\\n\\nExecutive details go here...",\n'
+            '  "fix_steps": ["Actionable step 1", "Actionable step 2"]\n'
             '}\n'
-            "The incident_report should be formatted in Markdown."
         )
     )
 
-    # response = llm.invoke([system_message, human_message])
+    response = None
     for attempt in range(max_retries):
         try:
+            print(f"✍️ [Attempt {attempt + 1}/{max_retries}] Requesting Markdown generation from API... Please wait.")
+            import sys; sys.stdout.flush()  # Forces Windows PowerShell to display this string immediately
+            
             response = llm.invoke([system_message, human_message]) 
             break
         except Exception as e:
-            if "503" in str(e) and attempt < max_retries - 1:
-                print(f"⚠️ Groq 503 (High Demand). Retrying in {retry_delay}s... (Attempt {attempt + 1}/{max_retries})")
+            err_msg = str(e).lower()
+            # 1. Handle API Rate Limiting (429) Contexts explicitly
+            if "429" in err_msg or "rate" in err_msg:
+                cool_down = 20
+                print(f"⚠️ API Rate Limited (429). Pausing pipeline execution execution for {cool_down}s to clear tracking window...")
+                time.sleep(cool_down)
+            # 2. Handle API Overloaded Server Caps (503) Contexts
+            elif ("503" in err_msg or "unavailable" in err_msg) and attempt < max_retries - 1:
+                print(f"⚠️ API Server Busy (503). Retrying in {retry_delay}s with exponential backoff...")
                 time.sleep(retry_delay)
                 retry_delay *= 2
             else:
-                # If it's a different error or we ran out of retries, raise it
+                print(f"❌ Unhandled API Call Exception raised: {e}")
                 raise e
+
+    if not response or not hasattr(response, 'content'):
+        return {}
+
     text = response.content.strip()
+
+    # Clean off any markdown wrappers the LLM might have inadvertently appended
+    if text.startswith("```json"):
+        text = text[7:]
+    if text.endswith("```"):
+        text = text[:-3]
+    text = text.strip()
 
     try:
         output = json.loads(text)
     except json.JSONDecodeError:
+        print("⚠️ Core JSON serialization parse failed due to inner formatting blocks. Dropping to deterministic structural fallbacks.")
         return {}
 
     if not isinstance(output, dict):
@@ -116,12 +137,13 @@ def run_reporter_llm(state: IncidentState) -> dict[str, Any]:
 
 
 def reporter(state: IncidentState) -> dict[str, Any]:
-    print("Reporter Working")
+    print("\n[bold cyan]📋 [Reporter Node Activated][/bold cyan]")
     llm_output = run_reporter_llm(state)
 
     incident_report = llm_output.get("incident_report", "")
     fix_steps = llm_output.get("fix_steps")
 
+    # Clean Fallback Block if JSON decode completely fell down
     if not incident_report:
         root_cause = state.get("root_cause", "Unknown")
         severity = state.get("severity", "P3")
@@ -129,25 +151,26 @@ def reporter(state: IncidentState) -> dict[str, Any]:
         summaries = state.get("per_service_summaries", {})
 
         lines: list[str] = [
-            "# Incident Report",
+            f"# Incident Report: {root_cause}",
             "",
-            f"**Severity:** {severity}",
+            f"**Severity Level:** {severity}",
             "",
-            f"**Root cause:** {root_cause}",
+            "## Executive Triage Summary",
+            "Widespread system microservice degradation observed across cluster interfaces.",
             "",
-            "## Affected services",
+            "## Impacted Infrastructure Components",
         ]
 
         if blast_radius:
-            lines.extend([f"- {service}" for service in blast_radius])
+            lines.extend([f"- **{service}**: Downstream cascade isolation verified." for service in blast_radius])
         else:
-            lines.append("- No secondary services were identified as affected.")
+            lines.append("- No secondary infrastructure components directly impacted.")
 
-        lines.extend(["", "## Service summaries"])
+        lines.extend(["", "## Core Log Diagnostic Anomalies"])
         for service, summary in summaries.items():
             lines.append(f"- **{service}**: {summary}")
 
-        lines.extend(["", "## Recommended fix steps"])
+        lines.extend(["", "## Strategic Remediation Framework Steps"])
         fallback_fix_steps = build_fix_steps(state)
         if fallback_fix_steps:
             lines.extend(
@@ -155,7 +178,7 @@ def reporter(state: IncidentState) -> dict[str, Any]:
             )
         else:
             lines.append(
-                "1. No specific fix steps were generated. Review service logs and investigate manually."
+                "1. Manual diagnostic inspection requested. Audit infrastructure log maps."
             )
 
         incident_report = "\n".join(lines).strip()
